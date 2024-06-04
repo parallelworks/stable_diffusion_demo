@@ -2,7 +2,7 @@
   <command interpreter='bash'>main.sh</command>
   <cancel interpreter='bash'>cancel.sh</cancel>
   <inputs>  
-    <section name='pwrl_host' type='section' title='GPU Executor' expanded='true'>
+    <section name='pwrl_001_gpu_executor' type='section' title='GPU Executor' expanded='true'>
       <param 
         name='resource' 
         type='computeResource' 
@@ -24,9 +24,9 @@
         name='_sch__dd_partition_e_' 
         label='SLURM partition' 
         type='dynamicPartitionDropdown' 
-        resource='pwrl_host.resource'
+        resource='pwrl_001_gpu_executor.resource'
         help='Partition to submit the interactive job. Leave empty to let SLURM pick the optimal option.' 
-        show_if='{"pwrl_host.jobschedulertype":"SLURM"}'
+        show_if='{"pwrl_001_gpu_executor.jobschedulertype":"SLURM"}'
         optional='true'
         dependent='false'
       ></param>
@@ -36,7 +36,7 @@
         type='text' 
         help='e.g. 01:00:00 - Amount of time slurm will honor the interactive session.' 
         value='01:00:00'
-        depends_on='pwrl_host.jobschedulertype'
+        depends_on='pwrl_001_gpu_executor.jobschedulertype'
         show_if='SLURM'
       ></param>
       <param 
@@ -44,7 +44,7 @@
         label='Scheduler directives' 
         type='text' 
         help='e.g. --mem=1000;--gpus-per-node=1 - Use the semicolon character ; to separate parameters. Do not include the SBATCH keyword.'
-        depends_on='pwrl_host.jobschedulertype'
+        depends_on='pwrl_001_gpu_executor.jobschedulertype'
         show_if='SLURM'
         optional='true'
       ></param>
