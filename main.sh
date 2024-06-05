@@ -29,21 +29,21 @@ export sshcmd="ssh -o StrictHostKeyChecking=no ${resource_username}@${resource_p
 
 echo; echo; echo "CREATING RUN SCRIPT"
 if [[ ${jobschedulertype} == "SLURM" ]]; then 
-    cp resources/001_gpu_executor/batch_header.sh run_stable_diffussion.sh
+    cp resources/001_gpu_executor/batch_header.sh run_stable_diffusion.sh
 else
-    echo '#!/bin/bash' > run_stable_diffussion.sh
+    echo '#!/bin/bash' > run_stable_diffusion.sh
 fi
 
-cat resources/001_gpu_executor/inputs.sh >> run_stable_diffussion.sh
-cat resources/001_gpu_executor/check_for_gpus.sh >> run_stable_diffussion.sh
-cat resources/001_gpu_executor/install.sh >> run_stable_diffussion.sh
-cat resources/001_gpu_executor/txt2img.sh >> run_stable_diffussion.sh
-chmod +x run_stable_diffussion.sh
+cat resources/001_gpu_executor/inputs.sh >> run_stable_diffusion.sh
+cat resources/001_gpu_executor/check_for_gpus.sh >> run_stable_diffusion.sh
+cat resources/001_gpu_executor/install.sh >> run_stable_diffusion.sh
+cat resources/001_gpu_executor/txt2img.sh >> run_stable_diffusion.sh
+chmod +x run_stable_diffusion.sh
 
 echo; echo; echo "TRANSFERRING RUN SCRIPT"
 ${sshcmd} mkdir -p ${resource_jobdir}
-resource_script_path=${resource_jobdir}/run_stable_diffussion.sh
-scp run_stable_diffussion.sh ${resource_username}@${resource_publicIp}:${resource_script_path}
+resource_script_path=${resource_jobdir}/run_stable_diffusion.sh
+scp run_stable_diffusion.sh ${resource_username}@${resource_publicIp}:${resource_script_path}
 
 echo; echo; echo "SUBMITTING JOB"
 if [[ ${jobschedulertype} == "SLURM" ]]; then
